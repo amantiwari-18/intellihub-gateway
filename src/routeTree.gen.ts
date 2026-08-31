@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WatchlistRouteImport } from './routes/watchlist'
+import { Route as FinanceIndexRouteImport } from './routes/finance.index'
+import { Route as FinanceSlugRouteImport } from './routes/finance.$slug'
 import { Route as JobsIndexRouteImport } from './routes/jobs.index'
 import { Route as JobsSlugRouteImport } from './routes/jobs.$slug'
 import { Route as SettlementsIndexRouteImport } from './routes/settlements.index'
@@ -20,6 +23,21 @@ import { Route as TendersSlugRouteImport } from './routes/tenders.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WatchlistRoute = WatchlistRouteImport.update({
+  id: '/watchlist',
+  path: '/watchlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceIndexRoute = FinanceIndexRouteImport.update({
+  id: '/finance/',
+  path: '/finance/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinanceSlugRoute = FinanceSlugRouteImport.update({
+  id: '/finance/$slug',
+  path: '/finance/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JobsIndexRoute = JobsIndexRouteImport.update({
@@ -55,18 +73,24 @@ const TendersSlugRoute = TendersSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/watchlist': typeof WatchlistRoute
+  '/finance/$slug': typeof FinanceSlugRoute
   '/jobs/$slug': typeof JobsSlugRoute
   '/settlements/$slug': typeof SettlementsSlugRoute
   '/tenders/$slug': typeof TendersSlugRoute
+  '/finance/': typeof FinanceIndexRoute
   '/jobs/': typeof JobsIndexRoute
   '/settlements/': typeof SettlementsIndexRoute
   '/tenders/': typeof TendersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/watchlist': typeof WatchlistRoute
+  '/finance/$slug': typeof FinanceSlugRoute
   '/jobs/$slug': typeof JobsSlugRoute
   '/settlements/$slug': typeof SettlementsSlugRoute
   '/tenders/$slug': typeof TendersSlugRoute
+  '/finance': typeof FinanceIndexRoute
   '/jobs': typeof JobsIndexRoute
   '/settlements': typeof SettlementsIndexRoute
   '/tenders': typeof TendersIndexRoute
@@ -74,9 +98,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/watchlist': typeof WatchlistRoute
+  '/finance/$slug': typeof FinanceSlugRoute
   '/jobs/$slug': typeof JobsSlugRoute
   '/settlements/$slug': typeof SettlementsSlugRoute
   '/tenders/$slug': typeof TendersSlugRoute
+  '/finance/': typeof FinanceIndexRoute
   '/jobs/': typeof JobsIndexRoute
   '/settlements/': typeof SettlementsIndexRoute
   '/tenders/': typeof TendersIndexRoute
@@ -85,27 +112,36 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/watchlist'
+    | '/finance/$slug'
     | '/jobs/$slug'
     | '/settlements/$slug'
     | '/tenders/$slug'
+    | '/finance/'
     | '/jobs/'
     | '/settlements/'
     | '/tenders/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/watchlist'
+    | '/finance/$slug'
     | '/jobs/$slug'
     | '/settlements/$slug'
     | '/tenders/$slug'
+    | '/finance'
     | '/jobs'
     | '/settlements'
     | '/tenders'
   id:
     | '__root__'
     | '/'
+    | '/watchlist'
+    | '/finance/$slug'
     | '/jobs/$slug'
     | '/settlements/$slug'
     | '/tenders/$slug'
+    | '/finance/'
     | '/jobs/'
     | '/settlements/'
     | '/tenders/'
@@ -113,9 +149,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WatchlistRoute: typeof WatchlistRoute
+  FinanceSlugRoute: typeof FinanceSlugRoute
   JobsSlugRoute: typeof JobsSlugRoute
   SettlementsSlugRoute: typeof SettlementsSlugRoute
   TendersSlugRoute: typeof TendersSlugRoute
+  FinanceIndexRoute: typeof FinanceIndexRoute
   JobsIndexRoute: typeof JobsIndexRoute
   SettlementsIndexRoute: typeof SettlementsIndexRoute
   TendersIndexRoute: typeof TendersIndexRoute
@@ -128,6 +167,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/watchlist': {
+      id: '/watchlist'
+      path: '/watchlist'
+      fullPath: '/watchlist'
+      preLoaderRoute: typeof WatchlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance/': {
+      id: '/finance/'
+      path: '/finance'
+      fullPath: '/finance/'
+      preLoaderRoute: typeof FinanceIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finance/$slug': {
+      id: '/finance/$slug'
+      path: '/finance/$slug'
+      fullPath: '/finance/$slug'
+      preLoaderRoute: typeof FinanceSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jobs/': {
@@ -177,9 +237,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WatchlistRoute: WatchlistRoute,
+  FinanceSlugRoute: FinanceSlugRoute,
   JobsSlugRoute: JobsSlugRoute,
   SettlementsSlugRoute: SettlementsSlugRoute,
   TendersSlugRoute: TendersSlugRoute,
+  FinanceIndexRoute: FinanceIndexRoute,
   JobsIndexRoute: JobsIndexRoute,
   SettlementsIndexRoute: SettlementsIndexRoute,
   TendersIndexRoute: TendersIndexRoute,
