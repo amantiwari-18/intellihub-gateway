@@ -14,7 +14,6 @@ export function DetailPage({ entry }: { entry: Entry }) {
     .filter((e) => e.id !== entry.id)
     .slice(0, 4);
   const { has, toggle, hydrated } = useWatchlist();
-  const href = `/${entry.section}/${entry.slug}`;
   const saved = hydrated && has(entry.id);
 
   return (
@@ -92,7 +91,7 @@ export function DetailPage({ entry }: { entry: Entry }) {
                   section: entry.section,
                   title: entry.title,
                   subtitle: entry.org,
-                  url: href,
+                  slug: entry.slug,
                   deadlineLabel: d.label,
                 })
               }
