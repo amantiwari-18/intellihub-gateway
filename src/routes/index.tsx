@@ -124,7 +124,8 @@ function Home() {
                 {results.map((r) => (
                   <li key={r.id}>
                     <Link
-                      to={`/${r.section}/${r.slug}`}
+                      to={DETAIL_ROUTE[r.section]}
+                      params={{ slug: r.slug }}
                       className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary"
                     >
                       <span className="text-sm font-semibold text-ink">{r.title}</span>
