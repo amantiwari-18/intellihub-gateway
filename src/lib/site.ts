@@ -47,4 +47,4 @@ export const SECTIONS = {
     blurb: "7th & 8th CPC salary, HRA, NPS and tender EMD/PBG calculators.",
     noun: "Calculator",
   },
-};
+} as const satisfies Record<SectionKey, { key: SectionKey; label: string; path: string; blurb: string; noun: string }>;
