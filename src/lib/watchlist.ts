@@ -8,7 +8,7 @@ export type WatchItem = {
   section: SectionKey;
   title: string;
   subtitle: string;
-  url: string;
+  slug: string;
   deadlineLabel: string;
 };
 

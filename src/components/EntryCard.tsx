@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { daysRemaining, type Entry } from "@/lib/data";
 import { useWatchlist } from "@/lib/watchlist";
+import { DETAIL_ROUTE } from "@/lib/site";
 
 export function EntryCard({ entry }: { entry: Entry }) {
   const d = daysRemaining(entry.deadline);
@@ -58,7 +59,7 @@ export function EntryCard({ entry }: { entry: Entry }) {
       </div>
 
       <h3 className="text-[1.05rem] font-extrabold leading-snug">
-        <Link to={href} className="transition-colors after:absolute after:inset-0 hover:text-primary">
+        <Link to={DETAIL_ROUTE[entry.section]} params={{ slug: entry.slug }} className="transition-colors after:absolute after:inset-0 hover:text-primary">
           {entry.title}
         </Link>
       </h3>
