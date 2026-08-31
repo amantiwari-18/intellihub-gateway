@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as JobsIndexRouteImport } from './routes/jobs.index'
+import { Route as JobsSlugRouteImport } from './routes/jobs.$slug'
+import { Route as SettlementsIndexRouteImport } from './routes/settlements.index'
+import { Route as SettlementsSlugRouteImport } from './routes/settlements.$slug'
+import { Route as TendersIndexRouteImport } from './routes/tenders.index'
+import { Route as TendersSlugRouteImport } from './routes/tenders.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JobsIndexRoute = JobsIndexRouteImport.update({
+  id: '/jobs/',
+  path: '/jobs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobsSlugRoute = JobsSlugRouteImport.update({
+  id: '/jobs/$slug',
+  path: '/jobs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettlementsIndexRoute = SettlementsIndexRouteImport.update({
+  id: '/settlements/',
+  path: '/settlements/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettlementsSlugRoute = SettlementsSlugRouteImport.update({
+  id: '/settlements/$slug',
+  path: '/settlements/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TendersIndexRoute = TendersIndexRouteImport.update({
+  id: '/tenders/',
+  path: '/tenders/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TendersSlugRoute = TendersSlugRouteImport.update({
+  id: '/tenders/$slug',
+  path: '/tenders/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/jobs/$slug': typeof JobsSlugRoute
+  '/settlements/$slug': typeof SettlementsSlugRoute
+  '/tenders/$slug': typeof TendersSlugRoute
+  '/jobs/': typeof JobsIndexRoute
+  '/settlements/': typeof SettlementsIndexRoute
+  '/tenders/': typeof TendersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/jobs/$slug': typeof JobsSlugRoute
+  '/settlements/$slug': typeof SettlementsSlugRoute
+  '/tenders/$slug': typeof TendersSlugRoute
+  '/jobs': typeof JobsIndexRoute
+  '/settlements': typeof SettlementsIndexRoute
+  '/tenders': typeof TendersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/jobs/$slug': typeof JobsSlugRoute
+  '/settlements/$slug': typeof SettlementsSlugRoute
+  '/tenders/$slug': typeof TendersSlugRoute
+  '/jobs/': typeof JobsIndexRoute
+  '/settlements/': typeof SettlementsIndexRoute
+  '/tenders/': typeof TendersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/jobs/$slug'
+    | '/settlements/$slug'
+    | '/tenders/$slug'
+    | '/jobs/'
+    | '/settlements/'
+    | '/tenders/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/jobs/$slug'
+    | '/settlements/$slug'
+    | '/tenders/$slug'
+    | '/jobs'
+    | '/settlements'
+    | '/tenders'
+  id:
+    | '__root__'
+    | '/'
+    | '/jobs/$slug'
+    | '/settlements/$slug'
+    | '/tenders/$slug'
+    | '/jobs/'
+    | '/settlements/'
+    | '/tenders/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  JobsSlugRoute: typeof JobsSlugRoute
+  SettlementsSlugRoute: typeof SettlementsSlugRoute
+  TendersSlugRoute: typeof TendersSlugRoute
+  JobsIndexRoute: typeof JobsIndexRoute
+  SettlementsIndexRoute: typeof SettlementsIndexRoute
+  TendersIndexRoute: typeof TendersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/jobs/': {
+      id: '/jobs/'
+      path: '/jobs'
+      fullPath: '/jobs/'
+      preLoaderRoute: typeof JobsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jobs/$slug': {
+      id: '/jobs/$slug'
+      path: '/jobs/$slug'
+      fullPath: '/jobs/$slug'
+      preLoaderRoute: typeof JobsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/': {
+      id: '/settlements/'
+      path: '/settlements'
+      fullPath: '/settlements/'
+      preLoaderRoute: typeof SettlementsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settlements/$slug': {
+      id: '/settlements/$slug'
+      path: '/settlements/$slug'
+      fullPath: '/settlements/$slug'
+      preLoaderRoute: typeof SettlementsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tenders/': {
+      id: '/tenders/'
+      path: '/tenders'
+      fullPath: '/tenders/'
+      preLoaderRoute: typeof TendersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tenders/$slug': {
+      id: '/tenders/$slug'
+      path: '/tenders/$slug'
+      fullPath: '/tenders/$slug'
+      preLoaderRoute: typeof TendersSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  JobsSlugRoute: JobsSlugRoute,
+  SettlementsSlugRoute: SettlementsSlugRoute,
+  TendersSlugRoute: TendersSlugRoute,
+  JobsIndexRoute: JobsIndexRoute,
+  SettlementsIndexRoute: SettlementsIndexRoute,
+  TendersIndexRoute: TendersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
