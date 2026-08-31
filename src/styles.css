@@ -5,17 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * KT-Transfer Intelligence Portal — LIGHT (white) design system.
+ * Every colour, shadow and gradient is a token. Never hardcode colours.
  */
 
 @theme inline {
@@ -25,7 +16,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -46,11 +37,18 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+
+  /* Section accents */
+  --color-jobs: var(--accent-jobs);
+  --color-tenders: var(--accent-tenders);
+  --color-settlements: var(--accent-settlements);
+  --color-finance: var(--accent-finance);
+  --color-detail: var(--accent-detail);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -59,77 +57,84 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.875rem;
+
+  /* Paper-white base */
+  --background: oklch(0.995 0.002 250);
+  --foreground: oklch(0.19 0.03 260);
+  --ink: oklch(0.19 0.03 260);
+  --ink-soft: oklch(0.46 0.025 260);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.976 0.004 250);
+
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.19 0.03 260);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --popover-foreground: oklch(0.19 0.03 260);
+
+  --primary: oklch(0.58 0.13 165);
+  --primary-foreground: oklch(0.995 0.002 250);
+  --secondary: oklch(0.968 0.006 250);
+  --secondary-foreground: oklch(0.24 0.03 260);
+  --muted: oklch(0.972 0.005 250);
+  --muted-foreground: oklch(0.53 0.024 258);
+  --accent: oklch(0.965 0.02 165);
+  --accent-foreground: oklch(0.35 0.09 165);
+  --destructive: oklch(0.58 0.21 25);
+  --destructive-foreground: oklch(0.995 0.002 250);
+  --border: oklch(0.912 0.008 255);
+  --input: oklch(0.912 0.008 255);
+  --ring: oklch(0.58 0.13 165);
+
+  /* Section accent tokens */
+  --accent-jobs: oklch(0.62 0.15 245);
+  --accent-tenders: oklch(0.66 0.15 62);
+  --accent-settlements: oklch(0.55 0.2 300);
+  --accent-finance: oklch(0.58 0.13 165);
+  --accent-detail: var(--accent-finance);
+
+  --sidebar: oklch(0.99 0.003 250);
+  --sidebar-foreground: oklch(0.19 0.03 260);
+  --sidebar-primary: oklch(0.58 0.13 165);
+  --sidebar-primary-foreground: oklch(0.995 0.002 250);
+  --sidebar-accent: oklch(0.965 0.006 250);
+  --sidebar-accent-foreground: oklch(0.24 0.03 260);
+  --sidebar-border: oklch(0.912 0.008 255);
+  --sidebar-ring: oklch(0.58 0.13 165);
+
+  /* Elevation + effects */
+  --shadow-soft: 0 1px 2px oklch(0.19 0.03 260 / 0.05), 0 8px 24px -14px oklch(0.19 0.03 260 / 0.18);
+  --shadow-lift: 0 2px 4px oklch(0.19 0.03 260 / 0.05), 0 24px 48px -22px oklch(0.19 0.03 260 / 0.28);
+  --gradient-brand: linear-gradient(135deg, oklch(0.62 0.14 168), oklch(0.6 0.14 200));
+  --gradient-paper: radial-gradient(
+      1100px 520px at 12% -10%,
+      color-mix(in oklab, var(--accent-detail) 12%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(900px 460px at 92% -6%, color-mix(in oklab, var(--accent-jobs) 10%, transparent), transparent 62%);
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+[data-accent="jobs"] {
+  --accent-detail: var(--accent-jobs);
+}
+[data-accent="tenders"] {
+  --accent-detail: var(--accent-tenders);
+}
+[data-accent="settlements"] {
+  --accent-detail: var(--accent-settlements);
+}
+[data-accent="finance"] {
+  --accent-detail: var(--accent-finance);
 }
 
 @layer base {
@@ -137,8 +142,143 @@
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent-detail) 24%, transparent);
+  }
+}
+
+/* ---------- Utilities ---------- */
+
+@utility paper-hero {
+  background-image: var(--gradient-paper);
+}
+
+@utility grid-lines {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-ink) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(70% 60% at 50% 0%, black, transparent 85%);
+}
+
+@utility surface-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+@utility card-hover {
+  &:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+    border-color: color-mix(in oklab, var(--accent-detail) 42%, var(--color-border));
+  }
+}
+
+@utility accent-chip {
+  color: color-mix(in oklab, var(--accent-detail) 78%, var(--color-ink));
+  background: color-mix(in oklab, var(--accent-detail) 10%, var(--color-surface));
+  border: 1px solid color-mix(in oklab, var(--accent-detail) 28%, transparent);
+}
+
+@utility accent-text {
+  color: color-mix(in oklab, var(--accent-detail) 80%, var(--color-ink));
+}
+
+@utility accent-bar {
+  background: linear-gradient(
+    90deg,
+    var(--accent-detail),
+    color-mix(in oklab, var(--accent-detail) 35%, transparent)
+  );
+}
+
+@utility text-brand-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+@utility ad-slot {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border: 1px dashed color-mix(in oklab, var(--color-ink) 12%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+}
+
+@utility prose-content {
+  & p,
+  & li {
+    color: var(--color-ink-soft);
+    line-height: 1.85;
+    font-size: 0.97rem;
+  }
+  & h2 {
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  & h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 1.75rem 0 0.6rem;
+  }
+  & ul {
+    margin: 0.75rem 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  & li {
+    padding-left: 1.1rem;
+    position: relative;
+  }
+  & li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--accent-detail);
   }
 }
