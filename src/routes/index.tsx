@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { seo } from "@/lib/seo";
-import { SITE, SECTIONS } from "@/lib/site";
+import { SITE, SECTIONS, DETAIL_ROUTE } from "@/lib/site";
 import { ENTRIES, daysRemaining } from "@/lib/data";
 import { EntryCard } from "@/components/EntryCard";
 import { AdSlot } from "@/components/AdSlot";

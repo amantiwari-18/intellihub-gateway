@@ -46,7 +46,12 @@ function FinanceHub() {
       <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6">
         <div className="grid gap-5 md:grid-cols-3">
           {FINANCE_TOOLS.map((t) => (
-            <Link key={t.id} to={`/finance/${t.slug}`} className="surface-card card-hover p-6">
+            <Link
+              key={t.id}
+              to="/finance/$slug"
+              params={{ slug: t.slug }}
+              className="surface-card card-hover p-6"
+            >
               <span className="accent-chip rounded-full px-2.5 py-1 text-[0.66rem] font-bold uppercase tracking-wide">
                 {t.badge}
               </span>

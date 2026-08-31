@@ -4,7 +4,7 @@ import { PageHero } from "./PageHero";
 import { Breadcrumbs } from "./Breadcrumbs";
 import { AdSlot } from "./AdSlot";
 import { FaqAccordion } from "./Faq";
-import { SECTIONS } from "@/lib/site";
+import { SECTIONS, DETAIL_ROUTE } from "@/lib/site";
 import { useWatchlist } from "@/lib/watchlist";
 
 export function DetailPage({ entry }: { entry: Entry }) {
@@ -119,7 +119,8 @@ export function DetailPage({ entry }: { entry: Entry }) {
               {related.map((r) => (
                 <li key={r.id}>
                   <Link
-                    to={`/${r.section}/${r.slug}`}
+                    to={DETAIL_ROUTE[r.section]}
+                    params={{ slug: r.slug }}
                     className="block text-[0.86rem] font-semibold leading-snug text-ink-soft transition-colors hover:text-primary"
                   >
                     {r.title}
