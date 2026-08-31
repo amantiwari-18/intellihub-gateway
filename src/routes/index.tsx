@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { seo } from "@/lib/seo";
-import { SITE, SECTIONS } from "@/lib/site";
+import { SITE, SECTIONS, DETAIL_ROUTE } from "@/lib/site";
 import { ENTRIES, daysRemaining } from "@/lib/data";
 import { EntryCard } from "@/components/EntryCard";
 import { AdSlot } from "@/components/AdSlot";
@@ -124,7 +124,8 @@ function Home() {
                 {results.map((r) => (
                   <li key={r.id}>
                     <Link
-                      to={`/${r.section}/${r.slug}`}
+                      to={DETAIL_ROUTE[r.section]}
+                      params={{ slug: r.slug }}
                       className="flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 hover:bg-secondary"
                     >
                       <span className="text-sm font-semibold text-ink">{r.title}</span>
@@ -200,11 +201,16 @@ function Home() {
           <SectionHeading title="Money tools" sub="Run the numbers before you apply or bid." to="/finance" />
           <div className="grid gap-5 md:grid-cols-3">
             {[
-              { to: "/finance/7th-cpc-salary-calculator", t: "7th CPC Salary Calculator", d: "Basic, DA, HRA, TA and NPS for any level." },
-              { to: "/finance/8th-cpc-salary-calculator", t: "8th CPC Projection", d: "Model revised pay on your own fitment factor." },
-              { to: "/finance/tender-emd-pbg-calculator", t: "EMD & PBG Calculator", d: "Instant earnest money and guarantee amounts." },
+              { slug: "7th-cpc-salary-calculator", t: "7th CPC Salary Calculator", d: "Basic, DA, HRA, TA and NPS for any level." },
+              { slug: "8th-cpc-salary-calculator", t: "8th CPC Projection", d: "Model revised pay on your own fitment factor." },
+              { slug: "tender-emd-pbg-calculator", t: "EMD & PBG Calculator", d: "Instant earnest money and guarantee amounts." },
             ].map((c) => (
-              <Link key={c.to} to={c.to} className="surface-card card-hover p-5">
+              <Link
+                key={c.slug}
+                to="/finance/$slug"
+                params={{ slug: c.slug }}
+                className="surface-card card-hover p-5"
+              >
                 <h3 className="text-[1rem] font-extrabold">{c.t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{c.d}</p>
               </Link>

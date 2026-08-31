@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { daysRemaining, type Entry } from "@/lib/data";
 import { useWatchlist } from "@/lib/watchlist";
+import { DETAIL_ROUTE } from "@/lib/site";
 
 export function EntryCard({ entry }: { entry: Entry }) {
   const d = daysRemaining(entry.deadline);
   const { has, toggle, hydrated } = useWatchlist();
   const saved = hydrated && has(entry.id);
-  const href = `/${entry.section}/${entry.slug}`;
 
   return (
     <article data-accent={entry.section} className="surface-card card-hover group relative flex flex-col p-5">
@@ -36,7 +36,7 @@ export function EntryCard({ entry }: { entry: Entry }) {
               section: entry.section,
               title: entry.title,
               subtitle: entry.org,
-              url: href,
+              slug: entry.slug,
               deadlineLabel: d.label,
             })
           }
@@ -58,7 +58,7 @@ export function EntryCard({ entry }: { entry: Entry }) {
       </div>
 
       <h3 className="text-[1.05rem] font-extrabold leading-snug">
-        <Link to={href} className="transition-colors after:absolute after:inset-0 hover:text-primary">
+        <Link to={DETAIL_ROUTE[entry.section]} params={{ slug: entry.slug }} className="transition-colors after:absolute after:inset-0 hover:text-primary">
           {entry.title}
         </Link>
       </h3>

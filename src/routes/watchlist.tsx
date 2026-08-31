@@ -3,6 +3,7 @@ import { PageHero } from "@/components/PageHero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { useWatchlist } from "@/lib/watchlist";
 import { seo } from "@/lib/seo";
+import { DETAIL_ROUTE } from "@/lib/site";
 
 export const Route = createFileRoute("/watchlist")({
   head: () => ({
@@ -53,7 +54,7 @@ function WatchlistPage() {
                   {i.section}
                 </span>
                 <h2 className="mt-3 text-[1rem] font-extrabold leading-snug">
-                  <Link to={i.url} className="hover:text-primary">
+                  <Link to={DETAIL_ROUTE[i.section]} params={{ slug: i.slug }} className="hover:text-primary">
                     {i.title}
                   </Link>
                 </h2>

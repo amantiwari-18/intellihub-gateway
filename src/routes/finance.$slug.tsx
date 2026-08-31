@@ -136,7 +136,8 @@ function CalculatorPage() {
               {FINANCE_TOOLS.filter((t) => t.slug !== tool.slug).map((t) => (
                 <li key={t.id}>
                   <Link
-                    to={`/finance/${t.slug}`}
+                    to="/finance/$slug"
+                    params={{ slug: t.slug }}
                     className="text-[0.86rem] font-semibold text-ink-soft hover:text-primary"
                   >
                     {t.title}

@@ -10,10 +10,15 @@ export const SITE = {
 
 export type SectionKey = "jobs" | "tenders" | "settlements" | "finance";
 
-export const SECTIONS: Record<
-  SectionKey,
-  { key: SectionKey; label: string; path: string; blurb: string; noun: string }
-> = {
+/** Typed route ids for each section's detail route — use with <Link params={{ slug }}>. */
+export const DETAIL_ROUTE = {
+  jobs: "/jobs/$slug",
+  tenders: "/tenders/$slug",
+  settlements: "/settlements/$slug",
+  finance: "/finance/$slug",
+} as const;
+
+export const SECTIONS = {
   jobs: {
     key: "jobs",
     label: "Jobs",
@@ -42,4 +47,4 @@ export const SECTIONS: Record<
     blurb: "7th & 8th CPC salary, HRA, NPS and tender EMD/PBG calculators.",
     noun: "Calculator",
   },
-};
+} as const satisfies Record<SectionKey, { key: SectionKey; label: string; path: string; blurb: string; noun: string }>;
